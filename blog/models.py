@@ -12,13 +12,13 @@ class Author(models.Model):
     last_name = models.CharField(max_length=50)
 
     def get_absolute_url(self):
-        return reverse("author_detal", kwargs={"pk": self.pk})
+        return reverse("author_detail", kwargs={"pk": self.pk})
     
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
 
-class Blog(models.Model):
+class BlogPost(models.Model):
     """
     Blog model describes the attributes of the blog posts
     and the relationships between the blogs and the comments and authors.
@@ -30,14 +30,14 @@ class Blog(models.Model):
     
     # TODO: Add a viewed attribute that increments anytime someone views the blog post
 
-    blog_author = models.ManyToManyField('Author')
+    blog_author = models.ManyToManyField(Author)
     content = models.TextField(max_length=100000, help_text="Enter in the content for the blog post.")
     
     class Meta:
-        ordering = ['-last_modified']
+        ordering = ['-date_posted']
 
     def get_absolute_url(self):
-        return reverse("blog_detal", kwargs={"pk": self.pk})
+        return reverse("blog_detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.title
@@ -49,8 +49,12 @@ class Comment(models.Model):
     """
     comment_author = models.ForeignKey(Author, on_delete=models.CASCADE)
     last_modified = models.DateTimeField(auto_now=True)
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, null=True)
     content = models.TextField(max_length=1000, help_text="Please write a concise comment about the blog post.")
 
+    class Meta:
+        ordering = ['last_modified']
+
     def __str__(self):
-        return f"{self.comment_author}: {self.post_time}"
+        return f"{self.comment_author}: {self.last_modified}"
 
