@@ -7,11 +7,11 @@
         {% if blog_post.blog_author.all.count > 1 %}
         <p>Authors:
             {% for author in blog_post.blog_author.all %}  
-                <span> <a href="#">{{ author }}</a> </span>
+                <span> <a href="{% url 'author-detail' author.pk %}">{{ author }}</a> </span>
             {% endfor %}
         </p>
         {% else %}
-            <p>Author: <a href="#">{{ blog_post.blog_author.get }}</a></p>
+            <p>Author: <a href="{% url 'author-detail' blog_post.blog_author.get.pk %}">{{ blog_post.blog_author.get }}</a></p>
         {% endif %}
         <p>Published: {{ blog_post.date_posted }}</p>
     </div>
@@ -24,7 +24,7 @@
     <div class="row justify-content-center my-5">
         <div class="col col-md-8">
             {% for comment in blog_post.comment_set.all %}
-                <a href="#">{{ comment.comment_author }}</a>
+                <a href="{% url 'author-detail' comment.comment_author.pk %}">{{ comment.comment_author }}</a>
                 <p>{{ comment.content }}</p>
             {% endfor %}
         </div>

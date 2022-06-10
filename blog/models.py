@@ -10,6 +10,8 @@ class Author(models.Model):
     """
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    date_born = models.DateField(help_text="Please enter in the date you were born.", null=True)
+    short_bio = models.TextField(help_text="In a few words, describe yourself.", max_length=10000, null=True)
 
     def get_absolute_url(self):
         return reverse("author_detail", kwargs={"pk": self.pk})
@@ -31,7 +33,7 @@ class BlogPost(models.Model):
     # TODO: Add a viewed attribute that increments anytime someone views the blog post
 
     blog_author = models.ManyToManyField(Author)
-    content = models.TextField(max_length=100000, help_text="Enter in the content for the blog post.")
+    content = models.TextField(max_length=1000000, help_text="Enter in the content for the blog post.")
     
     class Meta:
         ordering = ['-date_posted']

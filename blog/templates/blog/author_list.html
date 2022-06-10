@@ -2,20 +2,19 @@
 
 {% block content %}
     <div class="text-center">
-        <h1>Welcome to my Mini Blog</h1>
+        <h1>List of Authors</h1>
     </div>
     <div class="row justify-content-center">
         <div class="col col-md-10">
-            {% if blog_posts %}
+            {% if authors %}
                 <ul class="list-group">
-                    {% for blog_post in blog_posts %}
-                        <a class="list-group-item" href="{% url 'blog-detail' blog_post.pk %}">{{ blog_post.title }}: {{ blog_post.date_posted }}</a>
+                    {% for author in authors %}
+                        <a class="list-group-item" href="{% url 'author-detail' author.pk %}">{{ author.first_name }} {{ author.last_name }}</a>
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>There are no posts in this blog.</p>
+                <p>There are no published authors yet.</p>
             {% endif %}
-
         </div>
     </div>
 

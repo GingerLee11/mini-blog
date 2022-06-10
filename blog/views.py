@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
-from .models import BlogPost
+from .models import Author, BlogPost
 
 
 class BlogHomeView(ListView):
@@ -24,3 +24,21 @@ class BlogPostDetailView(DetailView):
     model = BlogPost
     template_name = 'blog/blogpost_detail.html'
     context_object_name = 'blog_post'
+
+
+class AuthorDetailView(DetailView):
+    """
+    Detailed view of the author on the blog.
+    """
+    model = Author
+    template_name = 'blog/author_detail.html'
+    context_object_name = 'author'
+
+
+class AuthorListView(ListView):
+    """
+    List view of all the authors on the blog.
+    """
+    model = Author
+    template_name = 'blog/author_list.html'
+    context_object_name = 'authors'
