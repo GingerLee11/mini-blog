@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row jusitfy-content-center my-2">
+        <div class="col-6">
+            <p class="lead">Logged out!</p>
+            <a class="btn btn-primary"href="{% url 'login'%}">login again</a>
+        </div>
+    </div>
+{% endblock %}

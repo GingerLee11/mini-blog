@@ -1,5 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+
 
 
 class Author(models.Model):
@@ -52,7 +55,7 @@ class Comment(models.Model):
     comment_author = models.ForeignKey(Author, on_delete=models.CASCADE)
     last_modified = models.DateTimeField(auto_now=True)
     post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, null=True)
-    content = models.TextField(max_length=1000, help_text="Please write a concise comment about the blog post.")
+    content = models.TextField(max_length=1000, help_text="Please write a concise comment about the blog post.", blank=True)
 
     class Meta:
         ordering = ['last_modified']
@@ -60,3 +63,13 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.comment_author}: {self.last_modified}"
 
+
+class Hit(models.Model):
+    """
+    Generic hit model counts the number
+    of views a certain page or object gets.
+    """
+    date = models.DateTimeField(auto_now_add=True)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey()
