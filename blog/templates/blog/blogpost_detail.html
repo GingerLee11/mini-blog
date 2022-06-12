@@ -23,10 +23,17 @@
     </div>
     <div class="row justify-content-center my-5">
         <div class="col col-md-8">
-            {% for comment in blog_post.comment_set.all %}
-                <a href="{% url 'author-detail' comment.comment_author.pk %}">{{ comment.comment_author }}</a>
-                <p>{{ comment.content }}</p>
-            {% endfor %}
+            <ul class="list-group">
+                {% for comment in blog_post.comment_set.all %}
+                    <a href="{% url 'author-detail' comment.comment_author.pk %}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                        <h4>{{ comment.comment_author }}</h4>
+                        <small class="text-muted">{{ comment.time_since_comment }} ago</small>
+                        </div>
+                        <p class="mb-1">{{ comment.content }}</p>
+                    </a>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 
