@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+
+from . import views
+from .forms import BlogUserCreationForm
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,3 +39,11 @@ if settings.DEBUG:
     urlpatterns += [
         re_path(r'^__debug__/', include(debug_toolbar.urls)),
     ]
+
+
+# User Registration views:
+urlpatterns += [
+    path('register/success/', TemplateView.as_view(template_name='registration/success.html'), name='register-success'),
+    path('register/', views.RegistrationView.as_view(), name='register'),
+    
+]

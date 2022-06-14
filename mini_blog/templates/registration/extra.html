@@ -1,0 +1,26 @@
+<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count}}</p>
+
+{{ wizard.management_form|crispy }}
+    {% if wizard.form.forms %}
+        {{ wizard.form.management_form }}
+        {% for form in wizard.form.forms %} 
+         
+            {% crispy form  %}
+        
+        {% endfor %}
+    {% endif %}
+
+
+
+{% else %}
+        {{ wizard.form|crispy }}
+    {% endif %}
+    {% if wizard.steps.next %}
+        <input class="btn btn-primary" type="submit" value="Next"/>
+    {% else %}
+        <input class="btn btn-primary" type="submit" value="Submit"/>
+    {% endif %}
+    {% if wizard.steps.prev %}
+        <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">First Step</button>
+        <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Back</button>
+    {% endif %}

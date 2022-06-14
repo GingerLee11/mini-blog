@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}User Information{% endblock title %}
+
+{% block content %}
+<h1>User Information</h1>
+<p class="lead">Please enter the following information</p>
+
+<form class="row g-3 m-1" method="post" action="">{% csrf_token %}
+
+    <div class="col col-6">
+        {{ form.first_name|as_crispy_field }}
+    </div>
+    <div class="col col-6">
+        {{ form.last_name|as_crispy_field }}
+    </div>
+    <div class="col col-12">
+        {{ form.date_born|as_crispy_field }}
+    </div>
+    <div class="col col-12">
+        {{ form.short_bio|as_crispy_field }}
+    </div>
+
+    <input class="btn btn-primary" type="submit" value='Register'>
+    <input type="hidden" name="next" value="{{ next }}" />
+
+</form>
+{% endblock content %}

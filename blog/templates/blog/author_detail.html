@@ -3,8 +3,11 @@
 {% block content %}
 
     <div class="text-center">
-        <h1>{{ bloguser.first_name }} {{ bloguser.last_name }}</h1>
-        <h3>Date Born: {{ bloguser.date_born }}</h3>
+        <h1>{{ bloguser.username }}</h1>
+        {% if bloguser.first_name %}
+            <h6>Name: {{ bloguser.first_name }} {{ bloguser.last_name }}</h6>
+        {% endif %}
+        <h6>Date Born: {{ bloguser.date_born }}</h6>
 
     </div>
 
