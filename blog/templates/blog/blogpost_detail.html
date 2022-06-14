@@ -6,12 +6,12 @@
         <h1>{{ blog_post.title }}</h1>
         {% if blog_post.blog_author.all.count > 1 %}
         <p>Authors:
-            {% for author in blog_post.blog_author.all %}  
-                <span> <a href="{% url 'author-detail' author.pk %}">{{ author }}</a> </span>
+            {% for bloguser in blog_post.blog_author.all %}  
+                <span> <a href="{% url 'bloguser-detail' bloguser.username %}">{{ bloguser }}</a> </span>
             {% endfor %}
         </p>
         {% else %}
-            <p>Author: <a href="{% url 'author-detail' blog_post.blog_author.get.pk %}">{{ blog_post.blog_author.get }}</a></p>
+            <p>Author: <a href="{% url 'bloguser-detail' blog_post.blog_author.get.username %}">{{ blog_post.blog_author.get }}</a></p>
         {% endif %}
         <p>Published: {{ blog_post.date_posted }}</p>
     </div>
@@ -25,7 +25,7 @@
         <div class="col col-md-8">
             <ul class="list-group">
                 {% for comment in blog_post.comment_set.all %}
-                    <a href="{% url 'author-detail' comment.comment_author.pk %}" class="list-group-item list-group-item-action">
+                    <a href="{% url 'bloguser-detail' comment.comment_author.username %}" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
                         <h4>{{ comment.comment_author }}</h4>
                         <small class="text-muted">{{ comment.time_since_comment }} ago</small>
