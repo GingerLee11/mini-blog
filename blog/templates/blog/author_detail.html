@@ -3,27 +3,27 @@
 {% block content %}
 
     <div class="text-center">
-        <h1>{{ author.first_name }} {{ author.last_name }}</h1>
-        <h3>Date Born: {{ author.date_born }}</h3>
+        <h1>{{ bloguser.first_name }} {{ bloguser.last_name }}</h1>
+        <h3>Date Born: {{ bloguser.date_born }}</h3>
 
     </div>
 
     <div class="row justify-content-center">
         <div class="col col-md-8">
-            {{ author.short_bio }}
+            {{ bloguser.short_bio }}
         </div>
     </div>
     <div class="row justify-content-center my-5">
         <div class="col col-md-8">
             <h3>Articles:</h3>
-            {% if author.blogpost_set.all %}
+            {% if bloguser.blogpost_set.all %}
             <ul class="list-group">
-                {% for blog_post in author.blogpost_set.all %}
+                {% for blog_post in bloguser.blogpost_set.all %}
                     <a class="list-group-item" href="{% url 'blog-detail' blog_post.pk %}">{{ blog_post.title }} - {{ blog_post.date_posted }}</a>
                 {% endfor %}
             </ul>
             {% else %}
-                <p>This author has yet to publish any articles.</p>
+                <p>This bloguser has yet to publish any articles.</p>
             {% endif %}   
         </div>
     </div>

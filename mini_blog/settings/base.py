@@ -40,15 +40,19 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1,localhost", cast=Csv(
 
 # Application definition
 
+# Custom user model
+AUTH_USER_MODEL = 'users.BlogUser'
+
 INSTALLED_APPS = [
-    'blog',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms'
+    'crispy_forms',
+    'blog.apps.BlogConfig',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

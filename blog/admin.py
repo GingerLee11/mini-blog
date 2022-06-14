@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Author, BlogPost, Comment
+from .models import BlogPost, Comment
 
 class PostCommentInline(admin.TabularInline):
     model = Comment
@@ -12,6 +12,3 @@ class BlogPostAdmin(admin.ModelAdmin):
 
     inlines = [PostCommentInline]
 
-admin.site.register(Author)
-# admin.site.register(BlogPost)
-# admin.site.register(Comment)
