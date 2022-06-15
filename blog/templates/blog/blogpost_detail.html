@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
+{% block styles %}{{ form.media }}{% endblock styles %}
+
 {% block content %}
 
     <div class="text-center">
@@ -17,7 +21,7 @@
     </div>
 
     <div class="row justify-content-center">
-        <div class="col col-md-8">
+        <div class="col col-md-9">
             {{ blog_post.content }}
         </div>
     </div>
@@ -30,9 +34,24 @@
                         <h4>{{ comment.comment_author }}</h4>
                         <small class="text-muted">{{ comment.time_since_comment }} ago</small>
                         </div>
-                        <p class="mb-1">{{ comment.content }}</p>
+                        <p class="mb-1">{{ comment.content|safe }}</p>
                     </a>
                 {% endfor %}
+                {% if user.is_authenticated %}
+                    <li class="list-group-item list-group-item-action p-2">
+                        <form action="{{ request.path }}" method="post">{% csrf_token %}
+                        
+                            {{ form.content|as_crispy_field }}
+
+                            <input class="btn btn-primary" type="submit" value="Add comment" />
+                            <input type="hidden" name="next" value="" />
+                        </form>
+                    </li> 
+                {% else %}
+                    <a class="btn btn-primary m-2" href="{% url 'login' %}">Login to add comments</a>
+                {% endif %}
+                
+
             </ul>
         </div>
     </div>
