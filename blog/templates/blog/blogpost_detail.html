@@ -22,7 +22,7 @@
 
     <div class="row justify-content-center">
         <div class="col col-md-9">
-            {{ blog_post.content }}
+            {{ blog_post.content|safe }}
         </div>
     </div>
     <div class="row justify-content-center my-5">
@@ -34,7 +34,7 @@
                         <h4>{{ comment.comment_author }}</h4>
                         <small class="text-muted">{{ comment.time_since_comment }} ago</small>
                         </div>
-                        <p class="mb-1">{{ comment.content|safe }}</p>
+                        <p class="mb-1">{{ comment.content }}</p>
                     </a>
                 {% endfor %}
                 {% if user.is_authenticated %}
@@ -43,7 +43,7 @@
                         
                             {{ form.content|as_crispy_field }}
 
-                            <input class="btn btn-primary" type="submit" value="Add comment" />
+                            <input class="btn btn-primary my-1 float-end" type="submit" value="Add comment" />
                             <input type="hidden" name="next" value="" />
                         </form>
                     </li> 
@@ -55,4 +55,3 @@
     </div>
 
 {% endblock content %}
-

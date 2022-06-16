@@ -54,7 +54,12 @@ class CommentFormView(SingleObjectMixin, FormView):
         """
         if not request.user.is_authenticated:
             return HttpResponseForbidden()
-        self.object = self.get_object()
+        # For whatever reason defining the object 
+        # below causes the page to fail
+        # TODO: Figure out why this worked before
+        # WHy it's recommended on the Django docs 
+        # and if it works fine now without this object 
+        # self.object = self.get_object()
         return super().post(request, *args, **kwargs)
 
     
