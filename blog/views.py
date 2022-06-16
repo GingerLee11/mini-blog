@@ -3,9 +3,10 @@ from django.views import View
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
-from django.http import Http404, HttpResponseForbidden, HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404, HttpResponseForbidden
+
 from .models import BlogPost, Comment
+
 from users.models import BlogUser
 from .forms import CommentForm
 
@@ -57,8 +58,6 @@ class CommentFormView(SingleObjectMixin, FormView):
         return super().post(request, *args, **kwargs)
 
     
-   
-
 class PostView(View):
 
     def get(self, request, *args, **kwargs):
